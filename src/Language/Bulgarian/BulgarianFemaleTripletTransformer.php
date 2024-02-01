@@ -27,11 +27,13 @@ class BulgarianFemaleTripletTransformer extends BulgarianTripletTransformer
             $words[] = $this->dictionary->getCorrespondingTen($tens);
         }
 
-        if ($units > 0 && ($hundreds > 0 || $tens > 0)) {
+        if ($units > 0 && ($hundreds > 0 || $tens > 1)) {
             $words[] = BulgarianDictionary::$and;
         }
 
-        $words[] = $this->dictionary->getCorrespondingUnitFemale($units);
+        if ($tens != 1) {
+            $words[] = $this->dictionary->getCorrespondingUnitFemale($units);
+        }
 
         return implode($this->dictionary->getSeparator(), $words);
     }
